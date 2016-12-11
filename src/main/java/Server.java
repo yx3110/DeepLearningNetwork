@@ -24,13 +24,13 @@ public class Server{
                     Socket s = ss.accept();
                     ObjectInputStream in = new ObjectInputStream(s.getInputStream());
                     List<List<Double>> valMatrix = (List<List<Double>>) in.readObject();
+
                     Double score = nn.evaluate(valMatrix);
 
                     Socket reply = new Socket("localhost",60011);
                     ObjectOutputStream oos = new ObjectOutputStream(reply.getOutputStream());
                     oos.writeObject(score);
                     oos.close();
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
